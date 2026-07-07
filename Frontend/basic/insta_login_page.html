@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Instagram — Login (Mock)</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#fafafa;
+      --card:#ffffff;
+      --muted:#8e8e8e;
+      --accent:#0095f6; /* Instagram blue-ish */
+      --border:#dbdbdb;
+      --radius:8px;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:linear-gradient(180deg,var(--bg),#ffffff);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px;
+      color:#111;
+    }
+
+    /* layout wrapper so we can show the phone mock + form on wide screens */
+    .container{
+      display:flex;
+      gap:40px;
+      align-items:center;
+      justify-content:center;
+      width:100%;
+      max-width:980px;
+    }
+
+    /* Card (login form) */
+    .card{
+      width:360px;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:24px 32px;
+      box-shadow:0 6px 20px rgba(0,0,0,0.04);
+    }
+
+    .brand{
+      text-align:center;
+      margin-bottom:12px;
+    }
+    .brand h1{
+      font-family: 'Grand Hotel', cursive;
+      font-size:36px;
+      margin:6px 0 0;
+      letter-spacing:1px;
+    }
+    /* if the Google Font isn't available, fallback to a simple wordmark */
+    .brand .logo{
+      font-weight:700;
+      font-size:26px;
+      font-family: Inter, sans-serif;
+    }
+
+    .subtitle{color:var(--muted);font-size:14px;text-align:center;margin-bottom:18px}
+
+    form .field{
+      margin-bottom:12px;
+    }
+    label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
+    input[type="text"],input[type="password"],input[type="email"]{
+      width:100%;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:6px;
+      font-size:14px;
+      outline:none;
+      background:#fff;
+    }
+    input:focus{box-shadow:0 0 0 3px rgba(0,149,246,0.08);border-color:var(--accent)}
+
+    .actions{
+      margin-top:6px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:100%;
+      padding:10px 12px;
+      border-radius:6px;
+      font-weight:600;
+      cursor:pointer;
+      border:0;
+    }
+    .btn-primary{background:linear-gradient(90deg,#0095f6,#006be6);color:#fff}
+    .btn-outline{background:transparent;border:1px solid var(--border);color:var(--muted)}
+
+    .or-row{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted);margin:18px 0}
+    .or-row .line{flex:1;height:1px;background:var(--border)}
+
+    .social-login{display:flex;align-items:center;justify-content:center;gap:8px;color:#385185;font-weight:600;cursor:pointer}
+
+    .small-card{margin-top:14px;text-align:center;padding:16px;border-radius:12px;background:var(--card);border:1px solid var(--border)}
+    .small-card a{color:var(--accent);text-decoration:none;font-weight:600}
+
+    .forgot{display:block;text-align:right;margin-top:8px;font-size:13px;color:var(--muted);text-decoration:none}
+
+    footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* responsive: show a mock phone on wide screens */
+    .phone-mock{
+      display:none;
+      width:300px;
+      height:600px;
+      border-radius:28px;
+      background:linear-gradient(180deg,#fff,#fafafa);
+      border:12px solid #f5f5f7;
+      box-shadow:0 14px 40px rgba(0,0,0,0.06);
+      padding:22px;
+    }
+    .phone-screen{
+      height:100%;
+      border-radius:16px;
+      overflow:hidden;
+      background:linear-gradient(180deg,#fff,#fff);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      padding:18px;
+      gap:12px;
+      border:1px solid var(--border);
+    }
+    .phone-screen .post{
+      width:100%;
+      height:120px;
+      background:linear-gradient(90deg,#f0f0f0,#fafafa);
+      border-radius:10px;
+      border:1px solid #eee;
+    }
+
+    @media(min-width:980px){
+      .phone-mock{display:block}
+    }
+
+    @media(max-width:420px){
+      .container{padding:0 12px}
+      .card{width:100%;padding:18px}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card" role="region" aria-label="Login form">
+      <div class="brand">
+        <div class="logo">InstaMock</div>
+        <div class="subtitle">Welcome back — log in to continue</div>
+      </div>
+
+      <form id="loginForm" onsubmit="handleSubmit(event)">
+        <div class="field">
+          <label for="username">Phone number, username or email</label>
+          <input id="username" name="username" type="text" autocomplete="username" required placeholder="you@example.com">
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <input id="password" name="password" type="password" autocomplete="current-password" required placeholder="••••••••">
+            <button type="button" aria-label="Toggle password visibility" onclick="togglePassword()" style="padding:8px;border-radius:6px;border:1px solid var(--border);background:#fff;cursor:pointer">Show</button>
+          </div>
+        </div>
+
+        <a class="forgot" href="#">Forgot password?</a>
+
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">Log in</button>
+        </div>
+
+        <div class="or-row" aria-hidden="true">
+          <div class="line"></div>
+          <div>OR</div>
+          <div class="line"></div>
+        </div>
+
+        <div style="text-align:center;">
+          <div class="social-login" role="button" tabindex="0" onclick="alert('Pretend social login')">Log in with Facebook</div>
+        </div>
+      </form>
+
+      <div class="small-card">
+        Don't have an account? <a href="#">Sign up</a>
+      </div>
+
+      <footer>
+        <div>Get the app.</div>
+        <div style="margin-top:8px;display:flex;gap:8px;justify-content:center">
+          <div style="width:110px;height:36px;border-radius:6px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:600;cursor:pointer">App Store</div>
+          <div style="width:110px;height:36px;border-radius:6px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:600;cursor:pointer">Google Play</div>
+        </div>
+      </footer>
+    </div>
+
+    <div class="phone-mock" aria-hidden="true">
+      <div class="phone-screen">
+        <div style="height:44px;width:100%;display:flex;align-items:center;gap:8px;padding:6px;">
+          <div style="width:36px;height:36px;border-radius:9px;background:linear-gradient(90deg,#ffd6e0,#ffd0b3);border:1px solid #eee"></div>
+          <div style="flex:1;height:14px;background:#f2f2f2;border-radius:6px"></div>
+        </div>
+        <div style="width:100%;height:6px;background:transparent"></div>
+        <div class="post"></div>
+        <div class="post"></div>
+        <div class="post" style="height:180px"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function togglePassword(){
+      const pw = document.getElementById('password');
+      const btn = event.currentTarget || event.target;
+      if(pw.type === 'password'){
+        pw.type = 'text';
+        btn.innerText = 'Hide';
+      } else {
+        pw.type = 'password';
+        btn.innerText = 'Show';
+      }
+    }
+
+    function handleSubmit(e){
+      e.preventDefault();
+      const u = document.getElementById('username').value.trim();
+      const p = document.getElementById('password').value;
+      if(!u || !p){
+        alert('Please provide both username and password.');
+        return;
+      }
+      // This is a mock — in a real app you'd POST to the server securely
+      alert('Logging in as ' + u + ' (this is a front-end mock)');
+    }
+  </script>
+</body>
+</html>
