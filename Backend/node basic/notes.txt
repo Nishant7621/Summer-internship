@@ -1,0 +1,48 @@
+Call stack -> thread pool , libu library -> call back (execute) -> call stack
+REPL in node
+npm i express
+node filename.js  for run
+
+get -> server ko request krke kuch le aao
+post -> server ko request krke kuch create krna 
+put -> 
+patch ->
+
+
+
+command for nodemon
+npx nodemon
+agar server me kuch change hoga to ye khud se restart kr dega
+
+MIDDLEware
+1> app level MIDDLEware
+2> router
+3> build in
+4> third party
+5> error handling
+
+
+HTTP status code
+200 ok status
+201  created status
+
+
+
+Status Code	Meaning	When to Use
+400	Bad Request	Invalid input or missing required fields
+401	Unauthorized	User is not logged in or token is missing/invalid
+403	Forbidden	User is logged in but doesn't have permission
+404	Not Found	Resource doesn't exist
+405	Method Not Allowed	Wrong HTTP method (less common in Express by default)
+409	Conflict	Duplicate resource (e.g., email already exists)
+422	Unprocessable Entity	Validation failed (often used with schema validation)
+429	Too Many Requests	Rate limit exceeded
+
+500 internal server error
+505 service unavailable
+
+
+
+
+password -> encrypt(hash code/chiper text) -> for hiding password
+and for comparing use becrypt
